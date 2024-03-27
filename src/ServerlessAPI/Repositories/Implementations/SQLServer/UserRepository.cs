@@ -7,7 +7,7 @@ using ServerlessAPI.Utilities;
 
 namespace ServerlessAPI.Repositories.Implementations.SQLServer
 {
-    public class UserRepositorySQLServer : IRepository
+    public class UserRepositorySQLServer : IUserRepository
     {
         /*        private readonly string _connectionString =  "Data Source=localhost;" +
                     "Initial Catalog=ServiceData;" +
@@ -183,7 +183,7 @@ namespace ServerlessAPI.Repositories.Implementations.SQLServer
             }
         }
 
-        public async Task<IList<IUserEntity>> GetUsersAsync(int limit = 10)
+        public async Task<IList<IUserEntity>> GetAllAsync(int limit = 10)
         {
             var result = new List<IUserEntity>();
             try

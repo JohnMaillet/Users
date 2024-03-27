@@ -7,7 +7,7 @@ using ServerlessAPI.Models.Interface;
 namespace ServerlessAPI.Repositories.Implementations.DynamoDB
 {
 
-    public class UserRepositoryDynamoDB : IRepository
+    public class UserRepositoryDynamoDB : IUserRepository
     {
         private readonly IDynamoDBContext context;
         private readonly ILogger<UserRepositoryDynamoDB> logger;
@@ -101,7 +101,7 @@ namespace ServerlessAPI.Repositories.Implementations.DynamoDB
             }
         }
 
-        public async Task<IList<IUserEntity>> GetUsersAsync(int limit = 10)
+        public async Task<IList<IUserEntity>> GetAllAsync(int limit = 10)
         {
             var result = new List<UserEntity>();
 

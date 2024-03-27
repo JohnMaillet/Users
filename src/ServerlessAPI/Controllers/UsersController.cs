@@ -12,11 +12,11 @@ namespace ServerlessAPI.Controllers;
 public class UsersController : ControllerBase
 {
     private readonly ILogger<UsersController> logger;
-    private readonly IRepository userRepository;
+    private readonly IUserRepository userRepository;
     private readonly IUserEntity userEntity;
     private readonly IErrorMessages errorMessages;
 
-    public UsersController(ILogger<UsersController> logger, IRepository userRepository, IUserEntity userEntity, IErrorMessages errorMessages)
+    public UsersController(ILogger<UsersController> logger, IUserRepository userRepository, IUserEntity userEntity, IErrorMessages errorMessages)
     {
         Console.Write($"type of IUserRepository: {userRepository.GetType()}");
         this.logger = logger;
@@ -31,7 +31,7 @@ public class UsersController : ControllerBase
     {
         if (limit <= 0 || limit > 100) return BadRequest("The limit should been between [1-100]");
 
-        return Ok(await userRepository.GetUsersAsync(limit));
+        return Ok(await userRepository.GetAllAsync(limit));
     }
 
     // GET api/users/5
@@ -54,7 +54,7 @@ public class UsersController : ControllerBase
     {
         try
         {
-            if (user == null) return ValidationProblem("Invalid input! User not informed");
+            if (user == null) return ValidationProblem("Invalid input! User not informed");            
             var result = await userRepository.CreateAsync(user);
 
             if (result)

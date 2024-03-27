@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace ServerlessAPI.Entities.Interface
 {
 
-    public interface IUserEntity
+    public interface IUserEntity: IEntity
     {
         public string Id { get; set; }
         public string? AccountCreationTimeStamp { get; set; }

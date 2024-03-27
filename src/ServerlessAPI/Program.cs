@@ -38,7 +38,7 @@ if (true)
             .AddSingleton<IAmazonDynamoDB>(new AmazonDynamoDBClient(RegionEndpoint.GetBySystemName(region)))
             .AddScoped<IDynamoDBContext, DynamoDBContext>()
             .AddScoped<IUserEntity, UserEntity>()
-            .AddScoped<IRepository, UserRepositoryDynamoDB>();
+            .AddScoped<IUserRepository, UserRepositoryDynamoDB>();
 } else {
     string connectionString =
         "Data Source=localhost;" +
@@ -48,7 +48,7 @@ if (true)
 
     builder.Services
         .AddScoped<IUserEntity, UserEntity>()
-        .AddScoped<IRepository>(x =>
+        .AddScoped<IUserRepository>(x =>
             new UserRepositorySQLServer(
                     connectionString,
                     x.GetRequiredService<ILogger<UserRepositorySQLServer>>(),
